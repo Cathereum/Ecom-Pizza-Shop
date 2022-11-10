@@ -1,0 +1,26 @@
+.root {
+  position: relative;
+  left: -150px;
+}
+
+.input {
+  border: 1.5px solid rgb(255, 164, 143);
+  width: 250px;
+  border-radius: 5px;
+  padding: 12px 45px;
+  font-size: 16px;
+  transition: all 0.15s ease-in-out;
+
+  &:hover,
+  &:focus {
+    width: 350px;
+  }
+}
+
+.search {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  left: 15px;
+  top: 12px;
+}
