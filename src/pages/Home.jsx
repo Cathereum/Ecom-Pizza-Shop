@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-
 import Categories from "../components/Categories";
 import Sort from "../components/Sort";
 import PizzaBlock from "../components/PizzaBlock";
 import Skeleton from "../components/Skeleton";
 import { searchContext } from "../App";
+import axios from "axios";
 
 const Home = () => {
   const { searchValue } = React.useContext(searchContext);
@@ -22,18 +22,17 @@ const Home = () => {
     setIsLoading(true);
     const search = searchValue ? `search=${searchValue}` : "";
 
-    fetch(
-      `https://63673e2979b0914b75dd4830.mockapi.io/items?${search}${
-        categoryId > 0 ? `category=${categoryId}` : ""
-      }&sortBy=${sortType.sortProperty}&order=asc`
-    )
+    axios
+      .get(
+        `https://63673e2979b0914b75dd4830.mockapi.io/items?${search}${
+          categoryId > 0 ? `category=${categoryId}` : ""
+        }&sortBy=${sortType.sortProperty}&order=asc`
+      )
       .then((res) => {
-        return res.json();
-      })
-      .then((arr) => {
-        setItems(arr);
+        setItems(res.data);
         setIsLoading(false);
       });
+
     window.scrollTo(0, 0);
   }, [categoryId, sortType, searchValue]);
 
